@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 const TypingSpeed = ({ currentUser, onUpdateScore }) => {
   const [timeLeft, setTimeLeft] = useState(60);
@@ -13,9 +13,16 @@ const TypingSpeed = ({ currentUser, onUpdateScore }) => {
   const sampleText = "The quick brown fox jumps over the lazy dog. This sentence contains all letters of the English alphabet. Typing speed tests help improve your keyboard skills and efficiency.";
 
   useEffect(() => {
-    document.title = "Typing Test - UniProject";
+    document.title = "Typing Test - TestYourBrain";
     setText(sampleText);
-  }, []);
+  }, [sampleText]);
+
+  const handleGameComplete = useCallback(() => {
+    setGameCompleted(true);
+    if (currentUser) {
+      onUpdateScore(currentUser.id, 'typing', wpm);
+    }
+  }, [currentUser, onUpdateScore, wpm]);
 
   useEffect(() => {
     let interval = null;
@@ -28,7 +35,7 @@ const TypingSpeed = ({ currentUser, onUpdateScore }) => {
       handleGameComplete();
     }
     return () => clearInterval(interval);
-  }, [isActive, timeLeft]);
+  }, [isActive, timeLeft, handleGameComplete]);
 
   const startGame = () => {
     setTimeLeft(60);
@@ -54,13 +61,6 @@ const TypingSpeed = ({ currentUser, onUpdateScore }) => {
     const timeElapsed = 60 - timeLeft;
     if (timeElapsed > 0) {
       setWpm(Math.round((wordCount / timeElapsed) * 60));
-    }
-  };
-
-  const handleGameComplete = () => {
-    setGameCompleted(true);
-    if (currentUser) {
-      onUpdateScore(currentUser.id, 'typing', wpm);
     }
   };
 

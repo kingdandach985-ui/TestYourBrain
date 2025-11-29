@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import MathQuestion from '../components/MathQuestion';
 
 const MathTest = ({ currentUser, onUpdateScore }) => {
@@ -8,8 +8,15 @@ const MathTest = ({ currentUser, onUpdateScore }) => {
   const [gameCompleted, setGameCompleted] = useState(false);
 
   useEffect(() => {
-    document.title = "Math Test - UniProject";
+    document.title = "Math Test - TestYourBrain";
   }, []);
+
+  const handleGameComplete = useCallback(() => {
+    setGameCompleted(true);
+    if (currentUser) {
+      onUpdateScore(currentUser.id, 'math', score);
+    }
+  }, [currentUser, onUpdateScore, score]);
 
   useEffect(() => {
     let interval = null;
@@ -22,7 +29,7 @@ const MathTest = ({ currentUser, onUpdateScore }) => {
       handleGameComplete();
     }
     return () => clearInterval(interval);
-  }, [isActive, timeLeft]);
+  }, [isActive, timeLeft, handleGameComplete]);
 
   const startGame = () => {
     setTimeLeft(120);
@@ -36,13 +43,6 @@ const MathTest = ({ currentUser, onUpdateScore }) => {
       setScore(prev => prev + 10);
     } else {
       setTimeLeft(prev => Math.max(0, prev - 5));
-    }
-  };
-
-  const handleGameComplete = () => {
-    setGameCompleted(true);
-    if (currentUser) {
-      onUpdateScore(currentUser.id, 'math', score);
     }
   };
 
