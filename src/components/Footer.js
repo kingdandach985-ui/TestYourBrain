@@ -21,9 +21,7 @@ const Footer = () => {
             <h4>Developers</h4>
             <ul className="developer-list">
               <li className="developer-item">👨‍💻 Ali Al Hadi Dandach</li>
-              <li className="developer-item">👨‍💻 Asaad Farhat</li>
-              <li className="developer-item">👨‍💻 Mohamad Chahoud</li>
-            </ul>
+             </ul>
           </div>
           
           <div className="footer-section">
