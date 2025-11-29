@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 const Navbar = ({ currentUser }) => {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,24 +25,31 @@ const Navbar = ({ currentUser }) => {
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
-        <Link to="/" className="logo">
+        <Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
           <div className="logo-container">
             <span className="logo-icon">⚡</span>
             <span className="logo-text">TestYourBrain</span>
-            <div className="logo-dots">
-              <div className="dot dot-1"></div>
-              <div className="dot dot-2"></div>
-              <div className="dot dot-3"></div>
-            </div>
           </div>
         </Link>
 
-        <ul className="nav-links">
+        {/* Hamburger Menu for Mobile */}
+        <button 
+          className={`mobile-menu-btn ${isMenuOpen ? 'active' : ''}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        {/* Navigation Links */}
+        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           {navItems.map((item) => (
             <li key={item.path}>
               <Link
                 to={item.path}
                 className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                onClick={() => setIsMenuOpen(false)}
               >
                 <span className="nav-emoji">{item.emoji}</span>
                 <span className="nav-label">{item.label}</span>
