@@ -103,5 +103,15 @@ function App() {
     </div>
   );
 }
-
+// في return إضافة style للـ main
+<main style={{ 
+  padding: '2rem', 
+  maxWidth: '1200px', 
+  margin: '80px auto 0', // 80px for fixed navbar
+  width: '100%' 
+}}>
+  <Routes>
+    {/* Routes here */}
+  </Routes>
+</main>
 export default App;
