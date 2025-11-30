@@ -39,7 +39,7 @@ const Navbar = ({ currentUser }) => {
         {currentUser && (
           <div className="user-info">
             <div className="user-avatar">
-              {currentUser.name.charAt(0).toUpperCase()}
+              {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}
             </div>
             <span className="username">@{currentUser.username}</span>
           </div>

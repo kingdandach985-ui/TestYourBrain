@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import UserForm from '../components/UserForm';
+import React, { useEffect, useState } from 'react';
 import ScoreTable from '../components/ScoreTable';
 
 const UserProfile = ({ users, currentUser, onAddUser, onRemoveUser }) => {
@@ -16,7 +15,7 @@ const UserProfile = ({ users, currentUser, onAddUser, onRemoveUser }) => {
 
       <div className="profile-content">
         <div className="profile-section">
-          <UserForm onAddUser={onAddUser} />
+          <LocalUserForm onAddUser={onAddUser} />
         </div>
 
         <div className="profile-section">
@@ -46,5 +45,67 @@ const UserProfile = ({ users, currentUser, onAddUser, onRemoveUser }) => {
     </div>
   );
 };
+const LocalUserForm = ({ onAddUser }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    username: ''
+  });
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted'); // للتأكد
+    if (formData.name.trim() && formData.username.trim()) {
+      onAddUser(formData);
+      setFormData({ name: '', username: '' });
+    }
+  };
+
+  return (
+    <div className="form-container">
+      <h3 className="form-title">Create Your Profile</h3>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="form-label">Full Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="form-input"
+            placeholder="Enter your full name"
+            required
+          />
+        </div>
+        
+        <div className="form-group">
+          <label className="form-label">Username</label>
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            className="form-input"
+            placeholder="Choose a username"
+            required
+          />
+        </div>
+        
+        <button 
+          type="submit" 
+          className="creative-btn"
+          onClick={handleSubmit} // أضف onClick كمان
+        >
+          🎯 Create Profile
+        </button>
+      </form>
+    </div>
+  );
+};
 export default UserProfile;

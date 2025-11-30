@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="logo-section">
               <div className="footer-logo">
                 <span className="logo-icon">⚡</span>
-                <span className="logo-text">Yellow.Test</span>
+                <span className="logo-text">TestYourBrain</span>
               </div>
               <p className="footer-description">
                 A creative university project with interactive activities and challenges.
@@ -18,10 +18,11 @@ const Footer = () => {
           </div>
           
           <div className="footer-section">
-            <h4>Developers</h4>
-            <ul className="developer-list">
-              <li className="developer-item">👨‍💻 Ali Al Hadi Dandach</li>
-             </ul>
+            <h4>Developer</h4>
+            <div className="developer-info">
+              <p className="developer-name">👨‍💻 Ali Al Hadi Dandach</p>
+              <p className="developer-role">Full Stack Developer</p>
+            </div>
           </div>
           
           <div className="footer-section">
@@ -41,12 +42,7 @@ const Footer = () => {
         
         <div className="footer-bottom">
           <div className="footer-copyright">
-            <p>© 2024 TestYourBrain. All rights reserved. | Made by Hadi for LIU University</p>
-          </div>
-          <div className="footer-decoration">
-            <div className="decoration-dot"></div>
-            <div className="decoration-dot"></div>
-            <div className="decoration-dot"></div>
+            <p>© 2024 TestYourBrain. All rights reserved. | Made with ❤️ by Ali Al Hadi Dandach</p>
           </div>
         </div>
       </div>
